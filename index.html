@@ -5,15 +5,19 @@
     </head>
     <body bgcolor="lightblue">
 
-        <h1>Note: Choose in the order Subject > Series > Year > Variant > Paper Type</h1>
+        <h1>Note: Choose in the order Subject > Series > Year > Paper Type > Variant</h1>
 
         <!-- Subject buttons -->
         <h1>Choose the Subject:</h1>
-        <button id="Math_ext" class="subject_button" onclick="subject_click(this)">Mathematics Extended (0580)</button>
+        <button id="Math" class="subject_button" onclick="subject_click(this)">Mathematics (0580)</button>
+        <button id="Biology" class="subject_button" onclick="subject_click(this)">Biology (0610)</button>
         <button id="Chemistry" class="subject_button" onclick="subject_click(this)">Chemistry (0620)</button>
         <button id="Physics" class="subject_button" onclick="subject_click(this)">Physics (0625)</button>
+        <button id="CS" class="subject_button" onclick="subject_click(this)">Computer Science (0478)</button>
         <button id="ICT" class="subject_button" onclick="subject_click(this)">Information and Communication Technology (0417)</button>
         <button id="English FLE" class="subject_button" onclick="subject_click(this)">First Language English (0500)</button>
+        <button id="Economics" class="subject_button" onclick="subject_click(this)">Economics (0455)</button>
+        <button id="BST" class="subject_button" onclick="subject_click(this)">Business Studies (0450)</button>
         <button id="Hindi" class="subject_button" onclick="subject_click(this)">Hindi as a Second Language (0549)</button>
 
         <br>
@@ -87,11 +91,15 @@
                 var clickedSubjectId = clickedSubject.id;
 
                 var subject_codes = {
-                    'Math_ext': '0580',
+                    'Math': '0580',
+                    'Biology':'0610',
                     'Chemistry': '0620',
                     'Physics': '0625',
+                    'CS':'0478',
                     'ICT': '0417',
                     'English FLE': '0500',
+                    'Economics':'0455',
+                    'BST':'0450',
                     'Hindi': '0549'
                 };
 
