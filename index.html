@@ -5,7 +5,7 @@
     </head>
     <body bgcolor="lightblue">
 
-        <h1>Note: Choose in the order Subject > Series > Year > Paper Type > Variant</h1>
+        <h1 id="order_note">Note: Choose in the order Subject > Series > Year > Paper Type > Variant</h1>
 
         <!-- Subject buttons -->
         <h1>Choose the Subject:</h1>
@@ -47,6 +47,7 @@
         <h1>Choose the Paper Type:</h1>
         <button id="question_paper" class="paper_type" onclick="paper_type_click(this)">Question Paper</button>
         <button id="mark_scheme" class="paper_type" onclick="paper_type_click(this)">Marking Scheme (Answer Sheet)</button>
+        <button id="supporting_files" class="paper_type" onclick="paper_type_click(this)">Supporting Files (For Online Practicals)</button>
 
         <br>
 
@@ -167,7 +168,8 @@
 
                 paper_type_codes = {
                     'question_paper': 'qp',
-                    'mark_scheme': 'ms'
+                    'mark_scheme': 'ms',
+                    'supporting_files':'sf'
                 }
 
                 paper_type = paper_type_codes[clickedTypeId];
