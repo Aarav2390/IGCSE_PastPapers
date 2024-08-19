@@ -5,7 +5,7 @@
     </head>
     <body bgcolor="lightblue">
 
-        <h1 id="order_note">Note: Choose in the order Subject > Series > Year > Paper Type > Variant</h1>
+        <h1 id="order_note">Note: Choose in the order <i>Subject > Series > Year > Paper Type > Variant</i></h1>
 
         <!-- Subject buttons -->
         <h1>Choose the Subject:</h1>
@@ -19,6 +19,7 @@
         <button id="Economics" class="subject_button" onclick="subject_click(this)">Economics (0455)</button>
         <button id="BST" class="subject_button" onclick="subject_click(this)">Business Studies (0450)</button>
         <button id="Hindi" class="subject_button" onclick="subject_click(this)">Hindi as a Second Language (0549)</button>
+        <button class="random_button" onclick="random_click('subject_button')">Random</button>
 
         <br>
 
@@ -27,6 +28,7 @@
         <button id="Feb/March" class="series" onclick="series_click(this)">February/March</button>
         <button id="May/June" class="series" onclick="series_click(this)">May/June</button>
         <button id="Oct/Nov" class="series" onclick="series_click(this)">October/November</button>
+        <button class="random_button" onclick="random_click('series')">Random</button>
 
         <br>
 
@@ -40,6 +42,7 @@
         <button id="2021" class="year" onclick="year_click(this)">2021</button>
         <button id="2022" class="year" onclick="year_click(this)">2022</button>
         <button id="2023" class="year" onclick="year_click(this)">2023</button>
+        <button class="random_button" onclick="random_click('year')">Random</button>
 
         <br>
 
@@ -48,6 +51,7 @@
         <button id="question_paper" class="paper_type" onclick="paper_type_click(this)">Question Paper</button>
         <button id="mark_scheme" class="paper_type" onclick="paper_type_click(this)">Marking Scheme (Answer Sheet)</button>
         <button id="supporting_files" class="paper_type" onclick="paper_type_click(this)">Supporting Files (For Online Practicals)</button>
+        <button class="random_button" onclick="random_click('paper_type')">Random</button>
 
         <br>
 
@@ -69,7 +73,9 @@
 		<h1>--------------------------------------------------------------------------------</h1>
 
         <!-- Final link placeholder -->
-        <div id="link_placeholder"></div>
+        <div id="main_link_placeholder"></div>
+        <div id="ms_link_placeholder"></div>
+        <div id="ending_text"></div>
 
         <script>
             var code;
@@ -200,15 +206,31 @@
             function genbutton_click() {
                 if (variant_num.length === 2) {
                     var variant_url = `${paper_type_url}_${variant_num}`;
-                    var final_url = `${variant_url}.pdf#view=FitH`;
-                    link_placeholder = document.getElementById('link_placeholder');
-					link_placeholder.innerHTML = "<br><h2>Generated Past Paper Link: </h2><br><a style='border:3px solid;padding:10px;font-size:20px' href='" + final_url + "' target='_blank'>" + final_url + "</a><br><br><br><h1>If the link doesn't work, the specified paper may not exist!</h1><h3>Credits: PapaCambridge</h3><br><br>";                    
-					scrollToBottom();
+                    var main_url = `${variant_url}.pdf#view=FitH`;
+                    var ms_link = `${year_url}_ms_${variant_num}.pdf#view=FitH`
+
+                    main_link_placeholder = document.getElementById('main_link_placeholder');
+					main_link_placeholder.innerHTML = "<br><h2>Generated Past Paper Link: </h2><br><a style='border:3px solid;padding:10px;font-size:20px' href='" + main_url + "' target='_blank'>" + main_url + "</a>";                    
+					
+                    ms_link_placeholder = document.getElementById("ms_link_placeholder");
+                    ms_link_placeholder.innerHTML = "<h2>Marking Scheme: </h2><br><a style='border:3px solid;padding:10px;font-size:20px' href='" + ms_link + "' target='_blank'>" + ms_link + "</a><br>"
+                    
+                    document.getElementById("ending_text").innerHTML = "<br><br><h1>If the link doesn't work, the specified paper may not exist!</h1><h3>Credits: PapaCambridge</h3><br><br>"
+
+                    scrollToBottom();
                 } else {
-                    alert('Invalid paper variant number! Please enter a 2 digits variant number.');
+                    alert('Invalid paper variant number!');
                 }
+            }
+
+            // Random button click
+            function random_click(className) {
+                var buttons = document.querySelectorAll(`.${className}`);
+                var randomIndex = Math.floor(Math.random() * buttons.length);
+                buttons[randomIndex].click();
             }
         </script>
 
     </body>
 </html>
+
