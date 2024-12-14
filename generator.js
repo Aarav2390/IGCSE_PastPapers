@@ -134,7 +134,7 @@ function paper_type_click(clickedType){
 
     //Check if supporting files selected, run gceguide url
     if (paper_type === 'sf') {
-        var gg_sf_link = `${gg_year_url}/0417_${series_letter}${year_code}_sf_${paper_num}.zip`
+        var gg_sf_link = `${gg_year_url}/0417_${series_letter}${year_code}_sf_${paper_num}`
 }}
 
 // Scroll to bottom
@@ -147,7 +147,7 @@ function scrollToBottom() {
 
 // Paper Number button click
 function genbutton_click() {
-    // Specific paper - Oct/Nov 2022 Paper 02 practicals 
+    // Check the specific case first
     if (paper_type === 'sf' && year === '2022' && series_letter === 'w' && paper_num === '02') {
         // Specific link for this special case
         var ms_paper_num = '2'; // paper number for ms since ms accepts '2' and not '02'
@@ -165,18 +165,19 @@ function genbutton_click() {
 
         scrollToBottom();
     } 
-    
-    // Normal functionality
+    // Existing functionality
     else if (paper_num.length === 2) {
         // Nested if for handling the sf (supporting files) case
-        if (paper_type === 'sf' && paper_num === '02') {
+        if (paper_type === 'sf') {
             // Generate the link for supporting files
+            var gg_sf_link = `${gg_year_url}/0417_${series_letter}${year_code}_sf_${paper_num}.zip`;
+
             main_link_placeholder = document.getElementById('main_link_placeholder');
             main_link_placeholder.innerHTML = "<br><h2>Generated Past Paper Link: </h2><br><a style='border:3px solid;padding:10px;font-size:20px' href='" + gg_sf_link + "' target='_blank'>" + gg_sf_link + "</a>";                    
 
-            ms_link = `${year_url}_ms_2.pdf#view=FitH`
+            // Supporting files don't have a marking scheme link
             ms_link_placeholder = document.getElementById("ms_link_placeholder");
-            ms_link_placeholder.innerHTML = "<h2>Marking Scheme: </h2><br><a style='border:3px solid;padding:10px;font-size:20px' href='" + ms_link + "' target='_blank'>" + ms_link + "</a><br>";
+            ms_link_placeholder.innerHTML = "";
 
             document.getElementById("ending_text").innerHTML = "<br><br><h1>If the link doesn't work, the specified paper may not exist!</h1><h3>Credits: PapaCambridge</h3><br><br>";
 
@@ -197,8 +198,28 @@ function genbutton_click() {
 
             scrollToBottom();
         }
-    } else {
-        alert('Invalid paper number!');
+    } 
+
+    else if (paper_num.length === 1) {
+        upd_paper_num = `0${paper_num}`
+
+        var number_url = `${paper_type_url}_${upd_paper_num}`;
+        var main_url = `${number_url}.pdf#view=FitH`;
+        var ms_link = `${year_url}_ms_${paper_num}.pdf#view=FitH`;
+
+        main_link_placeholder = document.getElementById('main_link_placeholder');
+        main_link_placeholder.innerHTML = "<br><h2>Generated Past Paper Link: </h2><br><a style='border:3px solid;padding:10px;font-size:20px' href='" + main_url + "' target='_blank'>" + main_url + "</a>";                    
+
+        ms_link_placeholder = document.getElementById("ms_link_placeholder");
+        ms_link_placeholder.innerHTML = "<h2>Marking Scheme: </h2><br><a style='border:3px solid;padding:10px;font-size:20px' href='" + ms_link + "' target='_blank'>" + ms_link + "</a><br>";
+
+        document.getElementById("ending_text").innerHTML = "<br><br><h1>If the link doesn't work, the specified paper may not exist!</h1><h3>Credits: PapaCambridge</h3><br><br>";
+
+        scrollToBottom();
+    }
+
+    else {
+        alert("Please enter a valid paper number");
     }
 }
 

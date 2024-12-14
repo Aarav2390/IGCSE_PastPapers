@@ -1,9 +1,10 @@
 <html>
     <head>
         <title>IGCSE Past Paper Generator</title>
+        <script src="./generator.js"></script>
         <link rel="stylesheet" href="./style.css">
     </head>
-    <body bgcolor="lightblue">
+    <body>
 
         <h1 id="order_note">Note: Choose in the order <i>Subject > Series > Year > Paper Type > Paper Number</i></h1>
 
@@ -46,6 +47,7 @@
         <button id="2021" class="year" onclick="year_click(this)">2021</button>
         <button id="2022" class="year" onclick="year_click(this)">2022</button>
         <button id="2023" class="year" onclick="year_click(this)">2023</button>
+        <button id="2024" class="year" onclick="year_click(this)">2024</button>
         <button class="random_button" onclick="random_click('year')">Random</button>
 
         <br>
@@ -282,8 +284,24 @@
 
                         scrollToBottom();
                     }
-                } else {
-                    alert('Invalid paper number!');
+                } 
+
+                else if (paper_num.length === 1) {
+                    upd_paper_num = `0${paper_num}`
+
+                    var number_url = `${paper_type_url}_${upd_paper_num}`;
+                    var main_url = `${number_url}.pdf#view=FitH`;
+                    var ms_link = `${year_url}_ms_${paper_num}.pdf#view=FitH`;
+
+                    main_link_placeholder = document.getElementById('main_link_placeholder');
+                    main_link_placeholder.innerHTML = "<br><h2>Generated Past Paper Link: </h2><br><a style='border:3px solid;padding:10px;font-size:20px' href='" + main_url + "' target='_blank'>" + main_url + "</a>";                    
+
+                    ms_link_placeholder = document.getElementById("ms_link_placeholder");
+                    ms_link_placeholder.innerHTML = "<h2>Marking Scheme: </h2><br><a style='border:3px solid;padding:10px;font-size:20px' href='" + ms_link + "' target='_blank'>" + ms_link + "</a><br>";
+
+                    document.getElementById("ending_text").innerHTML = "<br><br><h1>If the link doesn't work, the specified paper may not exist!</h1><h3>Credits: PapaCambridge</h3><br><br>";
+
+                    scrollToBottom();
                 }
             }
 
